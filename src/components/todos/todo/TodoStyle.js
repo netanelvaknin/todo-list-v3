@@ -67,14 +67,14 @@ const CommonButton = styled(Button)`
 export const IamSureButton = styled(CommonButton)`
   &,
   &:hover {
-    background: ${(props) => props.theme.palette.success.main};
+    background: ${(props) => props.theme.palette.error.main};
   }
 `;
 
 export const IwillKeepButton = styled(CommonButton)`
   &,
   &:hover {
-    background: ${(props) => props.theme.palette.error.main};
+    background: ${(props) => props.theme.palette.success.main};
   }
 `;
 

@@ -23,10 +23,10 @@ export const TodosState = ({ children }) => {
   };
 
   const toggleCompletedState = (id) => {
-    const todosCopy = todos;
-    const todo = todosCopy.findIndex((todo) => todo.id === id);
+    const todosCopy = [...todos];
+    const todoIndex = todosCopy.findIndex((todo) => todo.id === id);
 
-    todosCopy[todo].completed = !todosCopy[todo].completed;
+    todosCopy[todoIndex].completed = !todosCopy[todoIndex].completed;
     setTodos([...todosCopy]);
   };
 
