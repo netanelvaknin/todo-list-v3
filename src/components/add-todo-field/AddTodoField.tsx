@@ -30,12 +30,12 @@ export const AddTodoField = () => {
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (!value.length || value.trim() === "") {
-      rootContext.setError("Empty todo is not allowed");
+      rootContext?.setError("Empty todo is not allowed");
       setShowErrorAlert(true);
     } else {
       todoContext && todoContext.addTodo(value);
       setShowErrorAlert(false);
-      rootContext.setError("");
+      rootContext?.setError("");
       resetInput();
     }
   };
@@ -74,7 +74,7 @@ export const AddTodoField = () => {
           severity="error"
           variant="filled"
         >
-          {rootContext.error}
+          {rootContext?.error}
         </MuiAlert>
       </Snackbar>
     </FormStyle>
