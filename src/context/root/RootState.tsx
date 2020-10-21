@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import RootContext from "./rootContext";
 
-export const RootState = ({ children }) => {
+interface RootStateProps {
+  children?: React.ReactNode;
+}
+
+export const RootState = (props: RootStateProps) => {
   const [error, setError] = useState("");
 
   return (
@@ -11,7 +15,7 @@ export const RootState = ({ children }) => {
         setError,
       }}
     >
-      {children}
+      {props.children}
     </RootContext.Provider>
   );
 };

@@ -1,10 +1,14 @@
-import React from "react";
-import { makeStyles, Button, Slide } from "@material-ui/core";
+import { makeStyles, Button } from "@material-ui/core";
 import styled from "styled-components/macro";
+
 
 export const FormStyle = styled.form`
   margin: 4rem 0 3rem;
 `;
+
+interface AddTodoFieldProps {
+  isSmallScreen: boolean;
+}
 
 export const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     "& .MuiOutlinedInput-input": {
       fontSize: "1.6rem",
-      width: (props) => (props.isSmallScreen ? "20rem" : "34rem"),
+      width: (props: AddTodoFieldProps) => (props.isSmallScreen ? "20rem" : "34rem"),
       color: theme.palette.text.secondary,
       background: "#FFF",
       paddingRight: "8rem",
@@ -49,6 +53,3 @@ export const useAlertStyles = makeStyles((theme) => ({
   },
 }));
 
-export function SlideTransition(props) {
-  return <Slide {...props} direction="down" />;
-}

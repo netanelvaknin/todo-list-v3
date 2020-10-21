@@ -1,5 +1,8 @@
 import React, { useContext, useState } from "react";
-import TodosContext from "../../../context/todos/todosContext";
+import {
+  TodosContext,
+  TodosContextType,
+} from "../../../context/todos/todosContext";
 import { Zoom } from "@material-ui/core";
 import {
   TodoStyle,
@@ -14,8 +17,14 @@ import {
   IwillKeepButton,
 } from "./TodoStyle";
 
-export const Todo = ({ id, title, completed }) => {
-  const context = useContext(TodosContext);
+interface TodoProps {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+export const Todo = ({ id, title, completed }: TodoProps) => {
+  const context = useContext<TodosContextType>(TodosContext);
   const [open, setOpen] = useState(false);
 
   const askAgain = () => {
@@ -23,8 +32,10 @@ export const Todo = ({ id, title, completed }) => {
   };
 
   const removeTodo = () => {
-    context.removeTodo(id);
-    setOpen(false);
+    if (context) {
+      context.removeTodo(id);
+      setOpen(false);
+    }
   };
 
   const keepTodo = () => {
@@ -38,7 +49,7 @@ export const Todo = ({ id, title, completed }) => {
           <CompletedCheckbox
             color="default"
             checked={completed}
-            onChange={() => context.toggleCompletedState(id)}
+            onChange={() => context && context.toggleCompletedState(id)}
           />
           <TodoDescription completed={completed}>{title}</TodoDescription>
           <RemoveButton onClick={askAgain}>Remove</RemoveButton>

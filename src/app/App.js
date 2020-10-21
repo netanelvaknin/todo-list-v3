@@ -1,7 +1,7 @@
 import React from "react";
 import TodosState from "../context/todos/TodosState";
 import RootState from "../context/root/RootState";
-import { Header, AddTodoField, Footer, Todos } from "../components";
+import { Header, AddTodoField, Footer, Todos } from "../components/index.ts";
 import AppStyle from "./AppStyle";
 
 function App() {

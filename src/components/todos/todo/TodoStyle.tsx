@@ -1,14 +1,25 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { Dialog, Typography, Button, Checkbox, Slide } from "@material-ui/core";
+import {
+  Dialog,
+  Typography,
+  Button,
+  Checkbox,
+  Slide,
+  SlideProps,
+} from "@material-ui/core";
+import { TransitionProps } from "@material-ui/core/transitions";
 import { ReactComponent as RemoveIcon } from "../icons/delete-icon.svg";
 import { mobile, tablet } from "../../../utils/screen-sizes";
 
-export const Transition = React.forwardRef((props, ref) => {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+export const Transition = React.forwardRef<unknown, SlideProps>(
+  (props, ref) => <Slide direction="up" ref={ref} {...props} />
+);
 
-export const AskAgainDialog = styled(Dialog)`
+interface AskAgainDialogProps {
+  TransitionComponent: TransitionProps;
+}
+export const AskAgainDialog = styled(Dialog)<AskAgainDialogProps>`
   .MuiPaper-root {
     padding: 2rem;
   }
@@ -91,7 +102,10 @@ export const RemoveButton = styled(RemoveIcon)`
   width: 2.5rem;
 `;
 
-export const TodoDescription = styled.div`
+interface TodoDescriptionProps {
+  completed: boolean;
+}
+export const TodoDescription = styled.div<TodoDescriptionProps>`
   text-decoration: ${(props) => props.completed && "line-through"};
   background: #fff;
   color: ${(props) => props.theme.palette.text.primary};

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { TextField, Snackbar } from "@material-ui/core";
 import useInputState from "../../utils/hooks/useInputState";
-import TodosContext from "../../context/todos/todosContext";
+import { TodosContext } from "../../context/todos/todosContext";
 import RootContext from "../../context/root/rootContext";
 import MuiAlert from "@material-ui/lab/Alert";
 import {
@@ -9,9 +9,14 @@ import {
   useAlertStyles,
   FormStyle,
   AddButton,
-  SlideTransition,
 } from "./AddTodoFieldStyle";
 import useSmallScreen from "../../utils/hooks/useSmallScreen";
+import { Slide } from "@material-ui/core";
+import { TransitionProps } from "@material-ui/core/transitions";
+
+export function SlideTransition(props: TransitionProps) {
+  return <Slide {...props} direction="down" />;
+}
 
 export const AddTodoField = () => {
   const isSmallScreen = useSmallScreen();
@@ -19,27 +24,23 @@ export const AddTodoField = () => {
   const todoContext = useContext(TodosContext);
   const rootContext = useContext(RootContext);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [value, handleChange, resetInput] = useInputState();
+  const [value, handleChange, resetInput]: any = useInputState();
   const classes = useStyles({ isSmallScreen });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (!value.length || value.trim() === "") {
       rootContext.setError("Empty todo is not allowed");
       setShowErrorAlert(true);
     } else {
-      todoContext.addTodo(value);
+      todoContext && todoContext.addTodo(value);
       setShowErrorAlert(false);
       rootContext.setError("");
       resetInput();
     }
   };
 
-  const handleCloseAlert = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
+  const handleCloseAlert = (e: React.SyntheticEvent<any, Event>) => {
     setShowErrorAlert(false);
   };
 

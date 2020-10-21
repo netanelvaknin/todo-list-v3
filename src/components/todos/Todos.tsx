@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import styled from "styled-components/macro";
 import Todo from "./todo/Todo";
-import TodosContext from "../../context/todos/todosContext";
+import { TodosContext } from "../../context/todos/todosContext";
 import { mobile, tablet } from "../../utils/screen-sizes";
 
-const TodosContainer = styled.div`
+interface TodosContainerProps {
+  existingTodos: number | undefined;
+}
+
+const TodosContainer = styled.div<TodosContainerProps>`
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -45,12 +49,13 @@ export const Todos = () => {
   const context = useContext(TodosContext);
 
   return (
-    <TodosContainer existingTodos={context.todos.length}>
-      {context.todos.length <= 0 ? (
+    <TodosContainer existingTodos={context && context.todos.length}>
+      {context && context.todos.length <= 0 ? (
         <NothingTodoText>
           Are you sure you have nothing to do ?{" "}
         </NothingTodoText>
       ) : (
+        context &&
         context.todos.map((todo) => (
           <Todo
             key={todo.id}
